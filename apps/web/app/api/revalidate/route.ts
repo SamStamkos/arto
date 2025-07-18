@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 
-export async function OPTIONS(request: NextRequest) {
+export async function OPTIONS() {
   return new NextResponse(null, {
     status: 200,
     headers: {
@@ -108,8 +108,9 @@ export async function POST(request: NextRequest) {
     
   } catch (error) {
     console.error('Revalidation error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { message: 'Error revalidating', error: error.message },
+      { message: 'Error revalidating', error: errorMessage },
       { status: 500 }
     )
   }
