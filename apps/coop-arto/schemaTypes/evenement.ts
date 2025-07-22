@@ -69,7 +69,6 @@ export const evenementSchema = defineType({
           {title: 'Exposition', value: 'exposition'},
           {title: 'Performance', value: 'performance'},
           {title: 'Conférence', value: 'conference'},
-          {title: 'Masterclass', value: 'masterclass'},
           {title: 'Spectacle', value: 'spectacle'}
         ]
       },
@@ -109,12 +108,8 @@ export const evenementSchema = defineType({
       type: 'object',
       fields: [
         {name: 'price', type: 'number', title: 'Prix'},
-        {name: 'currency', type: 'string', title: 'Devise', initialValue: 'EUR'},
-        {name: 'ticketUrl', type: 'url', title: 'URL de réservation'},
         {name: 'soldOut', type: 'boolean', title: 'Complet', initialValue: false},
-        {name: 'freeEvent', type: 'boolean', title: 'Événement gratuit', initialValue: false},
-        {name: 'presaleDate', type: 'datetime', title: 'Date de prévente'},
-        {name: 'salesEndDate', type: 'datetime', title: 'Fin de vente'}
+        {name: 'freeEvent', type: 'boolean', title: 'Événement gratuit', initialValue: false}
       ]
     }),
     defineField({
@@ -131,18 +126,6 @@ export const evenementSchema = defineType({
         ]
       },
       initialValue: 'upcoming'
-    }),
-    defineField({
-      name: 'featured',
-      title: 'Événement mis en avant',
-      type: 'boolean',
-      initialValue: false
-    }),
-    defineField({
-      name: 'tags',
-      title: 'Tags',
-      type: 'array',
-      of: [{type: 'string'}]
     }),
     defineField({
       name: 'organizer',

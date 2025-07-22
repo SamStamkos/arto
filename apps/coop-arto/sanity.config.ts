@@ -3,7 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
-const singletonTypes = new Set(['home', 'artistes', 'services', 'about', 'contact', 'programmation', 'membres'])
+const singletonTypes = new Set(['home', 'artistes', 'services', 'about', 'contact', 'programmation', 'membres', 'appelDossiers', 'banner', 'settings'])
 
 export default defineConfig({
   name: 'default',
@@ -46,6 +46,10 @@ export default defineConfig({
               .title('Page Membres')
               .id('membres')
               .child(S.document().schemaType('membres').documentId('membres')),
+            S.listItem()
+              .title('Page Appel de dossiers')
+              .id('appelDossiers')
+              .child(S.document().schemaType('appelDossiers').documentId('appelDossiers')),
             S.divider(),
             S.listItem()
               .title('Événements')
@@ -65,8 +69,21 @@ export default defineConfig({
               .id('couleurs')
               .child(S.documentTypeList('couleurs').title('Couleurs')),
             ...S.documentTypeListItems().filter(
-              (listItem) => !singletonTypes.has(listItem.getId()) && !['evenement', 'artiste', 'categories', 'couleurs'].includes(listItem.getId())
+              (listItem) => !singletonTypes.has(listItem.getId()) && !['evenement', 'artiste', 'categories', 'couleurs', 'modulesLibrary'].includes(listItem.getId())
             ),
+            S.divider(),
+            S.listItem()
+              .title('Bibliothèque de modules')
+              .id('modulesLibrary')
+              .child(S.documentTypeList('modulesLibrary').title('Bibliothèque de modules')),
+            S.listItem()
+              .title('Bannière d\'information')
+              .id('banner')
+              .child(S.document().schemaType('banner').documentId('banner')),
+            S.listItem()
+              .title('Configuration')
+              .id('settings')
+              .child(S.document().schemaType('settings').documentId('settings')),
           ])
     }),
     visionTool()
